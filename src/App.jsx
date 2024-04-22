@@ -29,21 +29,20 @@ function App() {
     })
     if(losingList.length===0) {
       setTensies(true)
-      console.log("You won!")
     } else {
       setTensies(false)
     }
   },[diceObjects])
 
 /**
- * Challenge: Tie off loose ends!
- * 1. If tenzies is true, Change the button text to "New Game"
- * 2. If tenzies is true, use the "react-confetti" package to
- *    render the <Confetti /> component 🎉
+ * Challenge: Future
+ * CSS dots on the dice
+ * Track the # of roles
+ * Track the amount of time taken
+ * Save time / rolls to LS
+ * (Mine: Turn a button red if it doesn't match)
  * 
- *    Hint: don't worry about the `height` and `width` props
- *    it mentions in the documentation.
- */
+*/
   
   function newDiceObjects() {
     const dice = []
@@ -76,9 +75,7 @@ function App() {
     }
   }
 
-
   function holdDice(diceId) {
-    console.log('diceId: ', diceId)
     const newDiceObjects = diceObjects.map(diceObject => {
       if(diceObject.id === diceId) {
         diceObject.isHeld = !diceObject.isHeld  
@@ -86,12 +83,12 @@ function App() {
       return diceObject
       
     })
-    console.log('newDiceObjects: ', newDiceObjects)
     setDiceObjects(newDiceObjects) 
   }
+  
   return (
     <main>
-      {tenzies ? <Winner /> : ""}
+      {tenzies && <Winner />}
       <h1 className="title">Tenzies</h1>
         <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
       <div className='app--die-container'>
