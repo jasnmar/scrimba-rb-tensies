@@ -4,6 +4,7 @@ main {
   height: 80vh;
   border-radius: 10px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -13,4 +14,15 @@ main {
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
   justify-items: center;
+}
+
+.btn {
+  font-family: "Karla", sans-serif;
+  font-weight: bold;
+  color: white;
+  background-color: #5035FF;
+  border-radius: 4px;
+  border: none;
+  padding: 8px 16px;
+  margin-top: 20px;
 }
