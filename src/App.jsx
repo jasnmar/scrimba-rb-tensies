@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import Die from './components/Die/Die'
 import { nanoid } from "nanoid"
+import Winner from './components/Winner/Winner'
 
 function App() {
   const [diceObjects, setDiceObjects] = useState(newDiceObjects())
@@ -29,16 +30,19 @@ function App() {
     if(losingList.length===0) {
       setTensies(true)
       console.log("You won!")
+    } else {
+      setTensies(false)
     }
   },[diceObjects])
 
 /**
- * Challenge: Check the dice array for these winning conditions:
- * 1. All dice are held, and
- * 2. all dice have the same value
+ * Challenge: Tie off loose ends!
+ * 1. If tenzies is true, Change the button text to "New Game"
+ * 2. If tenzies is true, use the "react-confetti" package to
+ *    render the <Confetti /> component 🎉
  * 
- * If both conditions are true, set `tenzies` to true and log
- * "You won!" to the console
+ *    Hint: don't worry about the `height` and `width` props
+ *    it mentions in the documentation.
  */
   
   function newDiceObjects() {
@@ -59,12 +63,17 @@ function App() {
   }
 
   function rollDice() {
-    setDiceObjects(diceObjects.map(diceObject => {
-      if(!diceObject.isHeld) {
-        return {...diceObject, value: getRandomInt(6) }
-      } 
-      return diceObject
-    }))
+    if (!tenzies) {
+
+      setDiceObjects(diceObjects.map(diceObject => {
+        if(!diceObject.isHeld) {
+          return {...diceObject, value: getRandomInt(6) }
+        } 
+        return diceObject
+      }))
+    } else {
+      setDiceObjects(newDiceObjects)
+    }
   }
 
 
@@ -82,12 +91,13 @@ function App() {
   }
   return (
     <main>
+      {tenzies ? <Winner /> : ""}
       <h1 className="title">Tenzies</h1>
         <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
       <div className='app--die-container'>
         {diceEls}
       </div>
-      <button onClick={rollDice} className="btn" id="roll-dice-btn">Roll Dice</button>
+      <button onClick={rollDice} className="btn" id="roll-dice-btn">{tenzies ? "New Game" : "Roll Dice" }</button>
     </main>
   )
 }
