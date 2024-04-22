@@ -4,25 +4,27 @@ import Die from './components/Die/Die'
 
 
 /**
- * Challenge: Create a `Roll Dice` button that will re-roll
- * all 10 dice
+ * Challenge: Update the array of numbers in state to be
+ * an array of objects instead. Each object should look like:
+ * { value: <random number>, isHeld: false }
  * 
- * Clicking the button should generate a new array of numbers
- * and set the `dice` state to that new array (thus re-rendering
- * the array to the page)
+ * Making this change will break parts of our code, so make
+ * sure to update things so we're back to a working state
  */
 
 function App() {
-  const [diceArray, setDiceArray] = useState(allNewDice(10))
+  //const [diceArray, setDiceArray] = useState(allNewDice(10))
+  const [diceObjects, setDiceObjects] = useState(newDiceObjects(10))
 
-  const diceEls = diceArray.map((die) => {
-    return <Die value={die} />
+  const diceEls = diceObjects.map((die) => {
+    return <Die value={die.value} />
   })
 
-  function allNewDice(numberToGenerate) {
+  function newDiceObjects(numberToGenerate) {
     const dice = []
     for(let i=0; i < numberToGenerate; i++) {
-      dice.push(getRandomInt(6))
+      const diceObject = {value: getRandomInt(6), isHeld: false }
+      dice.push(diceObject)
     }
     return dice
   }
@@ -32,7 +34,7 @@ function App() {
   }
 
   function rollDice() {
-    setDiceArray(allNewDice(10))
+    setDiceObjects(newDiceObjects(10))
   }
 
   return (
