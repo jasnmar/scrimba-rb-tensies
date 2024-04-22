@@ -5,19 +5,29 @@ import { nanoid } from "nanoid"
 
 
 /**
- * Challenge: Update the array of numbers in state to be
- * an array of objects instead. Each object should look like:
- * { value: <random number>, isHeld: false }
+ * Challenge: Create a function `holdDice` that takes
+ * `id` as a parameter. For now, just have the function
+ * console.log(id).
  * 
- * Making this change will break parts of our code, so make
- * sure to update things so we're back to a working state
+ * Then, figure out how to pass that function down to each
+ * instance of the Die component so when each one is clicked,
+ * it logs its own unique ID property. (Hint: there's more
+ * than one way to make that work, so just choose whichever
+ * you want)
+ * 
  */
 
 function App() {
   const [diceObjects, setDiceObjects] = useState(newDiceObjects(10))
 
   const diceEls = diceObjects.map((die) => {
-    return <Die key={die.id} held={die.isHeld} value={die.value} />
+    return <Die 
+      key={die.id} 
+      held={die.isHeld} 
+      value={die.value} 
+      handleClick={holdDice}
+      id={die.id}
+    />
   })
 
   function newDiceObjects(numberToGenerate) {
@@ -41,6 +51,10 @@ function App() {
     setDiceObjects(newDiceObjects(10))
   }
 
+
+  function holdDice(diceId) {
+    console.log('diceId: ', diceId)
+  }
   return (
     <main>
       <div className='app--die-container'>
