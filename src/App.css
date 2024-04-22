@@ -1,6 +1,16 @@
 main {
-  margin: 100px;
+  margin: 20px 10px;
   background-color: #F5F5F5;
   height: 80vh;
   border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app--die-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  justify-items: center;
 }

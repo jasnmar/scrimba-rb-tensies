@@ -1,0 +1,13 @@
+.die--die-body {
+    background-color: white;
+    height: 36px;
+    width: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    font-family: 'Karla', sans-serif;
+    font-weight: bold;
+    font-size: 1.25rem;
+    box-shadow: 1px 1px 5px black;
+}
