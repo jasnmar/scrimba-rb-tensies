@@ -6,15 +6,24 @@ import Die from './components/Die/Die'
 /**
  * Challenge:
  * 
- * Write a function (allNewDice) that returns an array 
- * of 10 random numbers between 1-6 inclusive.
+ * Create state to hold our array of numbers. (Initialize
+ * the state by calling our `allNewDice` function so it 
+ * loads all new dice as soon as the app loads)
  * 
- * Log the array of numbers to the console for now
+ * Map over the state numbers array to generate our array
+ * of Die elements and render those in place of our
+ * manually-written 10 Die elements.
  */
 function App() {
-  const [count, setCount] = useState(0)
+  const [diceArray, setDiceArray] = useState(allNewDice(10))
 
   console.log('allNewDice: ', allNewDice(10))
+
+  const diceEls = diceArray.map((die) => {
+    console.log('running')
+    return <Die value={die} />
+  })
+
   function allNewDice(numberToGenerate) {
     const dice = []
     for(let i=0; i < numberToGenerate; i++) {
@@ -22,6 +31,7 @@ function App() {
     }
     return dice
   }
+
   function getRandomInt(max) {
     return Math.floor(Math.random() * max)+1;
   }
@@ -29,16 +39,7 @@ function App() {
   return (
     <main>
       <div className='app--die-container'>
-        <Die value="1" />
-        <Die value="1" />
-        <Die value="1" />
-        <Die value="1" />
-        <Die value="1" />
-        <Die value="1" />
-        <Die value="1" />
-        <Die value="1" />
-        <Die value="1" />
-        <Die value="1" />
+        {diceEls}
       </div>
     </main>
   )
