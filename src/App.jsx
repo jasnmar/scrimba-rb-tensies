@@ -1,21 +1,20 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import Die from './components/Die/Die'
 import { nanoid } from "nanoid"
 
 
 /**
- * Challenge: Update the `rollDice` function to not just roll
- * all new dice, but instead to look through the existing dice
- * to NOT role any that are being `held`.
- * 
- * Hint: this will look relatively similiar to the `holdDice`
- * function below. When creating new dice, remember to use
- * `id: nanoid()` so any new dice have an `id` as well.
+ * Challenge:
+ * 1. Add new state called `tenzies`, default to false. It
+ *    represents whether the user has won the game yet or not.
+ * 2. Add an effect that runs every time the `dice` state array 
+ *    changes. For now, just console.log("Dice state changed").
  */
 
 function App() {
   const [diceObjects, setDiceObjects] = useState(newDiceObjects())
+  const [tenzies, setTensies] = useState(false)
 
   const diceEls = diceObjects.map((die) => {
     return <Die 
@@ -26,6 +25,10 @@ function App() {
       id={die.id}
     />
   })
+
+  useEffect(() => {
+    console.log('Dice State Change')
+  },[diceObjects])
 
   
   function newDiceObjects() {
@@ -69,6 +72,8 @@ function App() {
   }
   return (
     <main>
+      <h1 className="title">Tenzies</h1>
+        <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
       <div className='app--die-container'>
         {diceEls}
       </div>
