@@ -11,15 +11,22 @@ function App() {
   const [lowScore, setLowScore] = useStickyState(100, 'lowScore')
 
   function useStickyState(defaultValue, key) {
+    const stickyValue = window.localStorage.getItem(key);
+
     const [value, setValue] = useState(() => {
-      const stickyValue = window.localStorage.getItem(key);
       return stickyValue !== null
         ? JSON.parse(stickyValue)
         : defaultValue;
     });
     useEffect(() => {
-      const ls = JSON.parse(window.localStorage.getItem(key)) || defaultValue
-        ls>value && window.localStorage.setItem(key, JSON.stringify(value));
+      if(stickyValue !== null) {
+        stickyValue>value ? 
+        window.localStorage.setItem(key, value) : 
+        setValue(stickyValue)
+      } else {
+        window.localStorage.setItem(key, value);
+        
+      }
     }, [key, value]);
     return [value, setValue];
   }
