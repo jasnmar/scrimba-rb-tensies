@@ -18,7 +18,7 @@ function App() {
         : defaultValue;
     });
     useEffect(() => {
-      const ls = JSON.parse(window.localStorage.getItem(key))
+      const ls = JSON.parse(window.localStorage.getItem(key)) || defaultValue
         ls>value && window.localStorage.setItem(key, JSON.stringify(value));
     }, [key, value]);
     return [value, setValue];
