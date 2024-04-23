@@ -25,10 +25,15 @@ main {
 .btn {
   font-family: inherit;
   font-weight: bold;
+  font-size: 2rem;
   color: white;
   background-color: #5035FF;
   border-radius: 4px;
   border: none;
   padding: 8px 16px;
   margin-top: 20px;
+}
+
+.app-rolls {
+  font-size: 1.5rem
 }

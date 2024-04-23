@@ -7,6 +7,22 @@ import Winner from './components/Winner/Winner'
 function App() {
   const [diceObjects, setDiceObjects] = useState(newDiceObjects())
   const [tenzies, setTensies] = useState(false)
+  const [rolls, setRolls] = useState(0)
+  const [lowScore, setLowScore] = useStickyState(100, 'lowScore')
+
+  function useStickyState(defaultValue, key) {
+    const [value, setValue] = useState(() => {
+      const stickyValue = localStorage.getItem(key);
+      return stickyValue !== null
+        ? JSON.parse(stickyValue)
+        : defaultValue;
+    });
+    useEffect(() => {
+      const ls = JSON.parse(localStorage.getItem(key))
+        ls>value && localStorage.setItem(key, JSON.stringify(value));
+    }, [key, value]);
+    return [value, setValue];
+  }
 
   const diceEls = diceObjects.map((die) => {
     return <Die 
@@ -29,20 +45,12 @@ function App() {
     })
     if(losingList.length===0) {
       setTensies(true)
+      setRolls(0)
+      setLowScore(rolls)
     } else {
       setTensies(false)
     }
   },[diceObjects])
-
-/**
- * Challenge: Future
- * CSS dots on the dice
- * Track the # of roles
- * Track the amount of time taken
- * Save time / rolls to LS
- * (Mine: Turn a button red if it doesn't match)
- * 
-*/
   
   function newDiceObjects() {
     const dice = []
@@ -63,7 +71,7 @@ function App() {
 
   function rollDice() {
     if (!tenzies) {
-
+      setRolls((rolls)=> rolls+1)
       setDiceObjects(diceObjects.map(diceObject => {
         if(!diceObject.isHeld) {
           return {...diceObject, value: getRandomInt(6) }
@@ -89,12 +97,15 @@ function App() {
   return (
     <main>
       {tenzies && <Winner />}
+      
+      <p className='app--low-score'>Low Score: {lowScore} </p>
       <h1 className="title">Tenzies</h1>
         <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
       <div className='app--die-container'>
         {diceEls}
       </div>
       <button onClick={rollDice} className="btn" id="roll-dice-btn">{tenzies ? "New Game" : "Roll Dice" }</button>
+      <p className='app-rolls'>Rolls: <span id="rolls">{rolls}</span></p>
     </main>
   )
 }
