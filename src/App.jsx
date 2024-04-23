@@ -12,14 +12,14 @@ function App() {
 
   function useStickyState(defaultValue, key) {
     const [value, setValue] = useState(() => {
-      const stickyValue = localStorage.getItem(key);
+      const stickyValue = window.localStorage.getItem(key);
       return stickyValue !== null
         ? JSON.parse(stickyValue)
         : defaultValue;
     });
     useEffect(() => {
-      const ls = JSON.parse(localStorage.getItem(key))
-        ls>value && localStorage.setItem(key, JSON.stringify(value));
+      const ls = JSON.parse(window.localStorage.getItem(key))
+        ls>value && window.localStorage.setItem(key, JSON.stringify(value));
     }, [key, value]);
     return [value, setValue];
   }
