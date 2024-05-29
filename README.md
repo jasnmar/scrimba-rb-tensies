@@ -1,8 +1,23 @@
-# React + Vite
+# Tensies
+## Module 10, React Basics
+from the Scrimba.com Frontend Career Path
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Learning Goals
+* Component Reuse (Die)
+* Arrays of components
+* Managing component state
+* Managing state 
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Installation: Prod:
+```
+npm install
+npm build
+npm preview
+```
+Dev:
+```
+npm install
+npm run dev
+```
+Deployment: https://glistening-semifreddo-a079a1.netlify.app/
