@@ -10,9 +10,24 @@
     font-weight: bold;
     font-size: 1.25rem;
     box-shadow: 1px 1px 5px black;
+    cursor: pointer;
 }
 
 
 .held {
     background-color: #59E391;
 }
+
+@property --num {
+    syntax: '<integer>';
+    initial-value: 0;
+    inherits: false;
+  }
+  
+  .die--die-body {
+    transition: --num .2s;
+    counter-reset: num var(--num);
+  }
+  div:empty {
+    --num: 6;
+  }

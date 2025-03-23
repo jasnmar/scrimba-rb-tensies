@@ -32,6 +32,7 @@ function App() {
   }
 
   const diceEls = diceObjects.map((die) => {
+    console.log('die: ', die)
     return <Die 
       key={die.id} 
       held={die.isHeld} 
